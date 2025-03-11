@@ -1,0 +1,44 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class AllFonts extends JFrame {
+    JPanel con = new JPanel(); // Panel to hold the labels
+    String[] availableFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+    int num = 0;
+
+    AllFonts() {
+        this.setTitle("Piczzle");
+        this.setSize(800, 800); // Set the frame size
+        this.setResizable(true); // Allow resizing
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(new Color(0xf5b982));
+
+        // Set vertical layout for the content panel
+        con.setLayout(new BoxLayout(con, BoxLayout.Y_AXIS)); // Layout for vertical stacking
+        con.setBackground(Color.WHITE); // Set panel background
+
+        // Add labels with font list to the panel
+        for (String fontFamilyName : availableFonts) {
+            num++;
+            JLabel label = new JLabel();
+            System.out.println(num+ ". "+fontFamilyName);
+            label.setText(fontFamilyName + " " + num);
+            label.setFont(new Font(fontFamilyName, Font.PLAIN, 30)); // Use a readable size
+            con.add(label); // Add the label to the panel
+        }
+
+        // Wrap the panel in a scroll pane
+        JScrollPane scrollPane = new JScrollPane(con);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // Only vertical scrolling
+
+        // Add the scroll pane to the frame
+        this.add(scrollPane);
+
+        this.setVisible(true); // Make the frame visible
+    }
+
+    public static void main(String[] args) {
+        new AllFonts();
+    }
+}
